@@ -1,4 +1,4 @@
-name: Deploy Laravel to Public_HTML via FTP
+name: Deploy Laravel to Public_HTML via fpt
 
 on:
   push:
