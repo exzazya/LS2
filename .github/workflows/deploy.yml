@@ -1,0 +1,26 @@
+name: Deploy Laravel to Public_HTML via FTP
+
+on:
+  push:
+    branches:
+      - deploy   # triggers deployment when pushing to deploy branch
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Upload full Laravel repo to public_html
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /home/logistics2.jetlougetravels-ph.com/public_html/
+          protocol: ftp
+          port: ${{ secrets.FTP_PORT }}
+          local-dir: ./       # uploads the whole repo
+          dangerous-clean-slate: false
